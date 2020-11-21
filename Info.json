@@ -1,0 +1,12 @@
+{
+    "Id": "Revised Crop Safety",
+    "DisplayName": "Revised Crop Safety",
+    "Author": "bzy-xyz",
+    "Version": "1.0.0",
+    "ManagerVersion": "0.22.12",
+    "GameVersion": "101",
+    "Requirements": [],
+    "LoadAfter": [],
+    "AssemblyName": "RevisedCropSafety.dll",
+    "EntryMethod": "RevisedCropSafety.Main.Load"
+  }
