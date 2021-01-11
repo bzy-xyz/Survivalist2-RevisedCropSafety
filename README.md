@@ -17,12 +17,44 @@ to plant crops without a chance to survive until harvest.
 Requirements
 ------------
 
-* Unity Mod Manager installed into Survivalist: Invisible Strain.
+* Survivalist: Invisible Strain v108 or later.
+
+Install (from precompiled build)
+--------------------------------
+
+1. Create a folder called `DLLs` in your Story of choice (e.g. 'Sandbox'), if
+   one doesn't already exist.
+2. Drop both DLL files into the folder. You don't need to replace `0Harmony.dll`
+   if one already exists.
+
 
 Build
 -----
 
-1. Checkout to `Mods/RevisedCropSafety`.
-2. From the `Mods/RevisedCropSafety/src` directory, run `dotnet build`.
-3. Copy `Mods/RevisedCropSafety/src/bin/Debug/net40/RevisedCropSafety.dll` to
-   `Mods/RevisedCropSafety`.
+1. Checkout the repository (for best results, to `dev/RevisedCropSafety`
+   relative to your Survivalist: Invisible Strain directory, otherwise you have
+   to re-point a bunch of assembly references).
+2. Run `dotnet build` inside `src` directory.
+3. From the `src/bin/Debug/net40/` directory, copy both `RevisedCropSafety.dll`
+   and `0Harmony.dll` to your Story's `DLLs` folder (create this folder if it
+   doesn't exist).
+   Note that you shouldn't need to replace `0Harmony.dll` if your Story (or a 
+   Story it depends on) already has it.
+
+License
+-------
+
+This mod contains code from Survivalist: Invisible Strain. Bob the P.R. Bot
+has confirmed that use of small amounts of such code in non-commercial mods
+for Survivalist: Invisible Strain is permissible.
+
+You may use other code from this mod in non-commercial mods for Survivalist: 
+Invisible Strain if doing so meets your needs.
+
+You may include compiled versions of this mod in your own Stories, including
+Stories that you author and subsequently publish to Steam Workshop. (However,
+future updates to Survivalist: Invisible Strain may render doing so
+unnecessary.)
+
+This project redistributes Harmony 2.0.4 under the terms of the MIT License. Its
+license is reproduced in full in the `3rdparty/LICENSE.Harmony` file.

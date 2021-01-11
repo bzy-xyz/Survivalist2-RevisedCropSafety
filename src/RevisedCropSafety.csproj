@@ -23,11 +23,8 @@
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>../../../Survivalist Invisible Strain_Data/Managed/UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityModManager">
-      <HintPath>../../../Survivalist Invisible Strain_Data/Managed/UnityModManager/UnityModManager.dll</HintPath>
-    </Reference>
     <Reference Include="0Harmony">
-      <HintPath>../../../Survivalist Invisible Strain_Data/Managed/UnityModManager/0Harmony.dll</HintPath>
+      <HintPath>../3rdparty/0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>../../../Survivalist Invisible Strain_Data/Managed/mscorlib.dll</HintPath>

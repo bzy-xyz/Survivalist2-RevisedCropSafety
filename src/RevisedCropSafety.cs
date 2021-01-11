@@ -1,44 +1,45 @@
-﻿using System;
+﻿﻿using HarmonyLib;
 
-using UnityEngine;
-using HarmonyLib;
-using UnityModManagerNet;
-
-namespace RevisedCropSafety
+public class Main
 {
-    static class Main
+    public static Harmony HarmonyInstance;
+
+    public static void Load()
     {
+        // UnityEngine.Application.SetStackTraceLogType(UnityEngine.LogType.Log, UnityEngine.StackTraceLogType.None);
 
-        public static UnityModManager.ModEntry mod;
-
-        static bool Load(UnityModManager.ModEntry modEntry)
-        {
-            var harmony = new Harmony(modEntry.Info.Id);
-            harmony.PatchAll();
-
-            mod = modEntry;
-
-            // mod.Logger.Log("loaded!");
-
-            return true;
-        }
-        
+        HarmonyInstance = new Harmony("RevisedCropSafety");
+        HarmonyInstance.PatchAll();
+        UnityEngine.Debug.Log("[RevisedCropSafety] loaded!");
     }
 
-    [HarmonyPatch(typeof(Weather), "IsSafeForPlantingCrops")]
-    static class Weather__IsSafeForPlantingCrops__Patch
+    public static void Unload()
     {
-        static void Postfix(ref bool __result, ref Weather __instance) {
-            // Main.mod.Logger.Log("Weather.IsSafeForPlantingCrops postfix");
-            // don't plant crops if nighttime temperatures over the next week would reach -0 C
-            if (__result) {
-                for (int i = 0; i <= 7; i++) {
-                    float futureTemperature = Weather.CalcAverageTemperatureInCelsiusFromDayOfYear(Session.Instance.DayOfYear + i) - (Weather.DiurnalTemperatureVariationInCelsius / 2.0f);
-                    // Main.mod.Logger.Log($"{Session.Instance.DayOfYear} {i} {futureTemperature}");
-                    if (futureTemperature <= 0.0f) {
-                        __result = false;
-                        break;
-                    }
+        UnityEngine.Debug.Log("[RevisedCropSafety] unloading!");
+        if (HarmonyInstance != null)
+        {
+            HarmonyInstance.UnpatchAll();
+        }
+    }
+}
+
+[HarmonyPatch(typeof(Weather), "IsSafeForPlantingCrops")]
+static class Weather__IsSafeForPlantingCrops__Patch
+{
+    static void Postfix(ref bool __result, ref Weather __instance)
+    {
+        // don't plant crops if nighttime temperatures over the next week would reach -0 C
+        // UnityEngine.Debug.Log("[RevisedCropSafety] postfix");
+        if (__result)
+        {
+            for (int i = 0; i <= 7; i++)
+            {
+                float futureTemperature = Weather.CalcAverageTemperatureInCelsiusFromDayOfYear(Session.Instance.DayOfYear + i) - (Weather.DiurnalTemperatureVariationInCelsius / 2.0f);
+                // UnityEngine.Debug.Log($"[RevisedCropSafety] {Session.Instance.DayOfYear} {i} {futureTemperature}");
+                if (futureTemperature <= 0.0f)
+                {
+                    __result = false;
+                    break;
                 }
             }
         }
